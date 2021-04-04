@@ -22,6 +22,7 @@ body {
 
 .post-meta {
     text-align: left;
+    font-size: 14px !important;
 }
 
 .pager-botton {
@@ -30,7 +31,6 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 800;
     font-family: "Sahel";
 }
 header.masthead .page-heading .subheading, header.masthead .site-heading .subheading {
@@ -39,4 +39,19 @@ header.masthead .page-heading .subheading, header.masthead .site-heading .subhea
 
 #mainNav, .btn {
     font-family: "Sahel" !important;
+}
+
+.post-title {
+    font-size: 25px !important;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.post-subtitle {
+    font-size: 18px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+.post-preview > a > .post-title {
+    font-size: 25px !important;
 }
