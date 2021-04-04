@@ -2,6 +2,26 @@ from . import jalali
 from django.utils import timezone
 
 
+# change en date numbers to fa date numbers
+def persian_numbers_converter(mystr):
+    numbers = {
+       "0": "۰",
+       "1": "۱",
+       "2": "۲",
+       "3": "۳",
+       "4": "۴",
+       "5": "۵",
+       "6": "۶",
+       "7": "۷",
+       "8": "۸",
+       "9": "۹", 
+    }
+
+    for e, p in numbers.items():
+        mystr = mystr.replace(e, p)
+
+    return mystr
+
 def jalali_converter(time):
     jmonths = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','تیر','مرداد','شهریور','مهر','آبان','آذر']
 
@@ -24,4 +44,4 @@ def jalali_converter(time):
         time.hour,
         time.minute,
     )
-    return output
+    return persian_numbers_converter(output)
