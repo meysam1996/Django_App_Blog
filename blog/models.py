@@ -28,7 +28,7 @@ class Article(models.Model):
         ('d', 'پیش نویس'),
         ('p', 'منتشر شده'),
     ]
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, verbose_name='عنوان')
     slug = models.SlugField(max_length=100, unique=True)
     category = models.ManyToManyField(Category, verbose_name='دسته بندی', related_name='articles')
     description = models.TextField()
@@ -36,7 +36,7 @@ class Article(models.Model):
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, verbose_name='وضعیت')
 
     class Meta:
         ordering = ['-publish']
