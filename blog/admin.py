@@ -40,10 +40,7 @@ class ArticleAdmin(admin.ModelAdmin):
     ordering = ['status', 'publish']
     actions = ['make_published', 'make_drafted']
 
-    def category_to_str(self, obj):
-        return "، ".join([category.title for category in obj.category.active()])
     
-    category_to_str.short_description = "دسته بندی"
     # Actions:
     def make_published(self, request, queryset):
         updated = queryset.update(status='p')
