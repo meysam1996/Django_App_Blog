@@ -68,3 +68,12 @@ body {
         margin-right: 0;
     }
 }
+
+.pagination {
+    float: left; 
+    margin-right: .3em;
+}
+
+#example2_previous {
+    margin-left: 4px;
+}

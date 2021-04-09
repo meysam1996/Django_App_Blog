@@ -29,7 +29,7 @@
                 {{article.title}}
               </h2>
               <h3 class="post-subtitle">
-                {{article.description | truncatewords:20}}
+                {{article.description | striptags | truncatewords:20}}
               </h3>
             </a>
             <p class="post-meta">نوشته شده توسط

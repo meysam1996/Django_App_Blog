@@ -1,5 +1,6 @@
 {% extends 'registration/base.html' %}
 
+{% block title-meta %} | لیست مقالات{% endblock %}
 {% block title %} لیست مقالات {% endblock %}
 
 {% block main %}
@@ -36,11 +37,11 @@
                   <tbody>
                     {% for article in object_list %}
                         <tr>
-                            <td>{{ article.title }}</td>
+                            <td style="width:25rem">{{ article.title }}</td>
                             <td><img src="{{article.thumbnail.url}}" width="120" height="100"></td>
                             <td>{{ article.category_to_str }}</td>
                             <td style="width:9rem">{{ article.author.get_full_name }}</td>
-                            <td>{{ article.description|truncatewords:20 }}</td>
+                            <td>{{ article.description | striptags | truncatewords:20 }}</td>
                             <td>{{ article.jpublish }}</td>
                             <td>
                                 {% if article.status == 'p'%}
@@ -62,4 +63,29 @@
             <!-- /.card -->
           </div>
         </div>
+        {% if is_paginated %}
+        <div class="row">
+          <div class="col-sm-12 col-md-5">
+            <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+              نمایش صفحه {{page_obj.number}} از {{page_obj.paginator.num_pages}} 
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+              <ul class="pagination" style="float: left; margin-right: .3em;">
+                {% if page_obj.has_previous %}
+                <li class="paginate_button page-item previous" id="example2_previous">
+                  <a href="{% url 'account:home' page_obj.previous_page_number %}" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">صفحه قبل</a>
+                </li>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <li class="paginate_button page-item next" id="example2_next">
+                  <a href="{% url 'account:home' page_obj.next_page_number %}" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">صفحه بعد</a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
 {% endblock %}
