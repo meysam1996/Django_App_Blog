@@ -1,0 +1,26 @@
+{% extends 'registration/base.html' %}
+
+{% block title-meta %} | حذف مقاله{% endblock %}
+{% block title %} حذف کردن مقاله {% endblock %}
+
+{% block main %}
+<div class="col-md-6 text-center mx-auto">
+    <!-- general form elements -->
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title mb-0 float-left">حذف مقاله</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">{% csrf_token %}
+                    <p>آیا می خواهید این مقاله "
+                    {{ article.title }}
+                    " از نویسنده
+                    {{ article.author.get_full_name }} 
+                    را حذف کنید ؟</p>
+                    <input type="submit" class="btn btn-outline-danger" value="تائید">
+                    <input type="submit" class="btn btn-secondary" value="بازگشت" onclick="window.location.href='{% url 'account:home' %}';return false;">
+                </form>
+            </div>
+        
+</div>
+{% endblock %}
