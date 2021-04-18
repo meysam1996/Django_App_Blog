@@ -9,6 +9,9 @@ from extensions.utils import jalali_converter
 class ArticleManager(models.Manager):
     def published(self):
         return self.filter(status='p')
+    
+    def is_Suser(self, request):
+        return self.filter(author=request.user.is_superuser)
 
 class CategoryManager(models.Manager):
     def active(self):
@@ -39,6 +42,8 @@ class Article(models.Model):
     STATUS_CHOICES = [
         ('d', 'پیش نویس'),
         ('p', 'منتشر شده'),
+        ('i', 'در حال بررسی'),
+        ('b', 'برگشت داده شده'),
     ]
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='articles', verbose_name='نویسنده')
     title = models.CharField(max_length=200, verbose_name='عنوان')

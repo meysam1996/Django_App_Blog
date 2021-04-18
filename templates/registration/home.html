@@ -49,7 +49,7 @@
                       {% for article in object_list %}
                           <tr>
                               <td style="width:25rem">
-                              {% if article.status == 'd' or user.is_superuser %}
+                              {% if article.status in 'bd'|make_list or user.is_superuser %}
                                 <a href="{% url 'account:article-update' article.pk %}">{{ article.title }}</a>
                               {% else %}
                                 {{ article.title }}
@@ -71,8 +71,23 @@
                                       <a class="badge badge-primary" href="{% url 'blog:detail' article.slug %}" target="_blank">
                                       نمایش مقاله در سایت
                                       </a>
+                                  {% elif article.status == 'i'%}
+                                      <span class="badge badge-dark">در حال بررسی</span><br>
+                                      {% if user.is_superuser %}
+                                        <a class="badge badge-info" href="{% url 'blog:preview' article.pk %}" target="_blank">
+                                        پیشنمایش
+                                        </a>
+                                      {% endif %}
                                   {% else %}
-                                      <span class="badge badge-secondary">پیشنویس</span>
+                                      {% if article.status == 'd'%}
+                                        <span class="badge badge-secondary">پیشنویس</span><br>
+                                      {% else %}
+                                        <span class="badge badge-warning">برگشت داده شده</span><br>
+                                      {% endif %}
+                                      <a class="badge badge-info" href="{% url 'blog:preview' article.pk %}" target="_blank">
+                                       پیشنمایش
+                                      </a>
+
                                   {% endif %}
                               </td>
                           </tr>
